@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleApi.Database;
 using SimpleApi.Services;
+using Tutorial4.Models;
 
 namespace SimpleApi.Controllers;
 
@@ -19,16 +20,28 @@ public class AnimalsController : ControllerBase
     [HttpGet]
     public IActionResult GetAnimals()
     {
-        var animals = new MockDb().Animals;   
+        var animals = _animalsService.GetAnimals();   
         return Ok(animals);
+    }
+    [HttpGet("{id}")]
+    public IActionResult GetAnimal(int id)
+    {
+        var animal = _animalsService.GetAnimal(id);   
+        return Ok(animal);
     }
     
     [HttpDelete("{id}")]
     public IActionResult DeleteAnimal(int id)
     {
-        var animals = new MockDb().Animals;
-        
-        return Ok();
+        var animal = _animalsService.GetAnimal(id) ;
+        return Ok(animal);
+    }
+
+    [HttpPost("{id}")]
+    public IActionResult EditAnimal(int id, Animal animal)
+    {
+        _animalsService.EditAnimal(id,animal);
+        return Ok(animal);
     }
 }
 

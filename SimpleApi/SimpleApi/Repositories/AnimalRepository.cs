@@ -11,6 +11,19 @@ public class AnimalRepository : IAnimalsRepository
     
     public IEnumerable<Animal> FetchAnimals()
     {
-        throw new NotImplementedException();
+        return _animals;
+    }
+
+    public void AddAnimal(Animal animal)
+    {
+        MockDb.AddAnimal(animal);
+    }
+
+    
+
+    public void RemoveAnimal(Animal animal)
+    {
+        MockDb.DeleteAnimal(animal.Id);
+                
     }
 }

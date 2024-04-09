@@ -5,35 +5,45 @@ namespace SimpleApi.Services;
 
 public class AnimalsService : IAnimalsService
 {
-    private readonly IAnimalsRepository _animals;
+    private readonly IAnimalsRepository _animalsRepository;
 
     public AnimalsService(IAnimalsRepository animalsRepository)
     {
-        _animals = animalsRepository;
+        _animalsRepository = animalsRepository;
+        
     }
 
     public IEnumerable<Animal> GetAnimals()
     {
-        throw new NotImplementedException();
+        return _animalsRepository.FetchAnimals();
     }
 
     public void CreateAnimal(Animal newAnimal)
     {
-        throw new NotImplementedException();
+        _animalsRepository.AddAnimal(newAnimal);
     }
 
-    public Animal RemoveAnimal(Animal animalToDelete)
+    public void RemoveAnimal(Animal animalToDelete)
     {
-        throw new NotImplementedException();
+        _animalsRepository.RemoveAnimal(animalToDelete);
     }
 
-    public void EditAnimal(Animal animalToEdit)
+    public void EditAnimal(int idAnimalToEdit, Animal newAnimal)
     {
-        throw new NotImplementedException();
+        _animalsRepository.RemoveAnimal(GetAnimal(idAnimalToEdit));
+        _animalsRepository.AddAnimal(newAnimal);
     }
+
 
     public Animal GetAnimal(int idAnimal)
     {
-        throw new NotImplementedException();
+        foreach (Animal animal in _animalsRepository.FetchAnimals())
+        {
+            if (animal.Id.Equals(idAnimal))
+            {
+                return animal;
+            }
+        }
+        return null;
     }
 }
