@@ -1,5 +1,7 @@
 using SimpleApi.Database;
 using SimpleApi.Endpoints;
+using SimpleApi.Repositories;
+using SimpleApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<MockDb>();
+builder.Services.AddScoped<IAnimalsRepository, AnimalRepository>();
+builder.Services.AddScoped<IAnimalsService, AnimalsService>();
+builder.Services.AddScoped<IVisitsRepository, VisitsRepository>();
+builder.Services.AddScoped<IVisitsService, VisitsService>();
 
 var app = builder.Build();
 
@@ -19,9 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
-app.MapAnimalEndpoints();
 
 app.MapControllers();
+
 app.Run();

@@ -1,3 +1,4 @@
+using System.Collections;
 using SimpleApi.Database;
 using Tutorial4.Models;
 
@@ -7,7 +8,7 @@ public class AnimalRepository : IAnimalsRepository
 
 {
 
-    private static readonly IEnumerable<Animal> _animals = MockDb.readAnimals();
+    private static readonly List<Animal> _animals = MockDb.ReadAnimals();
     
     public IEnumerable<Animal> FetchAnimals()
     {

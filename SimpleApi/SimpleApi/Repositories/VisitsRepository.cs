@@ -1,3 +1,4 @@
+using System.Collections;
 using SimpleApi.Database;
 using Tutorial4.Models;
 
@@ -5,7 +6,7 @@ namespace SimpleApi.Repositories;
 
 public class VisitsRepository : IVisitsRepository
 {
-    private static readonly IEnumerable<Visit> _visits = MockDb.readVisits();
+    private static readonly List<Visit> _visits = MockDb.readVisits();
     
     public IEnumerable<Visit> FetchVisits()
     {
