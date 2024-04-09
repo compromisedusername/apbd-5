@@ -4,13 +4,22 @@ namespace SimpleApi.Database;
 
 public class MockDb
 {
-    public List<Animal> Animals { get; set; } = new List<Animal>();
+    private static List<Animal> Animals { get; set; }
+    private static List<Visit> Visits { get; set; }
 
     public MockDb()
     {
-        Animals.Add(new Animal());
-        Animals.Add(new Animal());
-        Animals.Add(new Animal());
-        Animals.Add(new Animal());
+        Animals = StaticData.Animals;
+        Visits = StaticData.Visits;
+    }
+
+    public static IEnumerable<Animal> readAnimals()
+    {
+        return Animals;
+    }
+
+    public static IEnumerable<Visit> readVisits()
+    {
+        return Visits;
     }
 }
